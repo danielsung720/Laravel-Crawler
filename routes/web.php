@@ -11,4 +11,4 @@
 |
 */
 
-Route::get('/', 'CrawlerController@testGetAllData');
+Route::get('/', 'CrawlerController@testGetOneData');

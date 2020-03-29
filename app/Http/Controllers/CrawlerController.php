@@ -16,12 +16,16 @@ class CrawlerController extends Controller
 
     public function testGetAllData()
     {
-        for($i = 0; $i <= 11; $i++) {
-            $crawler = $this->crawlerService->getOriginalData("http://astro.click108.com.tw/daily_10.php?iAstro=$i");
-            $target = $this->crawlerService->getOneData($crawler);
+            $data = $this->crawlerService->getAllData();
             
-            print_r($target);
-        }
+            print_r($data);
+    }
 
+    public function testGetOneData()
+    {
+        $i = 1;
+        $data = $this->crawlerService->getOneData($i);
+            
+        print_r($data);
     }
 }
