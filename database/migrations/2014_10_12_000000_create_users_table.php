@@ -13,12 +13,18 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('constellation', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->rememberToken();
+            $table->date('date');
+            $table->string('constellation');
+            $table->string('overall_star');
+            $table->string('overall_description');
+            $table->string('love_star');
+            $table->string('love_description');
+            $table->string('career_star');
+            $table->string('career_description');
+            $table->string('money_star');
+            $table->string('money_description');
             $table->timestamps();
         });
     }
@@ -30,6 +36,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('constellation');
     }
 }

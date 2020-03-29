@@ -11,4 +11,6 @@
 |
 */
 
-Route::get('/', 'CrawlerController@testGetOneData');
+Route::get('/', function(){
+    return view('welcome');
+});

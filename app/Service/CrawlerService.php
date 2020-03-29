@@ -4,15 +4,18 @@ namespace App\Services;
 
 use GuzzleHttp\Client;
 use Symfony\Component\DomCrawler\Crawler;
+use App\Repositories\CrawlerRepository;
 
 class CrawlerService
 {
     /** @var Client  */
     private $client;
+    private $crawlerRepository;
 
-    public function __construct()
+    public function __construct(CrawlerRepository $crawlerRepository)
     {
         $this->client = app(Client::class);
+        $this->crawlerRepository = $crawlerRepository;
     }
 
     /**
@@ -34,8 +37,8 @@ class CrawlerService
         for($i = 0; $i <= 11; $i++) {
             $crawler = $this->getOriginalData("http://astro.click108.com.tw/daily_10.php?iAstro=$i");
             $data = $this->getData($crawler);
-            
-            print_r($data);
+
+            $this->crawlerRepository->createData($data);
         }
     }
 
@@ -43,8 +46,8 @@ class CrawlerService
     {
             $crawler = $this->getOriginalData("http://astro.click108.com.tw/daily_10.php?iAstro=$i");
             $data = $this->getData($crawler);
-            
-            print_r($data);
+
+            $this->crawlerRepository->createData($data);
     }
 
     public function getData($crawler)
@@ -53,7 +56,7 @@ class CrawlerService
         $data['Constellation'] = array_first($this->getConstellation($crawler));
         $data['OverallStar'] = array_first($this->getOverallStar($crawler));
         $data['OverallStar'] = mb_substr($data['OverallStar'], 4, 5,'UTF-8');
-        $data['OverallStarDescription'] = array_first($this->getOverallDescription($crawler));
+        $data['OverallDescription'] = array_first($this->getOverallDescription($crawler));
         $data['LoveStar'] = array_first($this->getLoveStar($crawler));
         $data['LoveStar'] = mb_substr($data['LoveStar'], 4, 5,'UTF-8');
         $data['LoveDescription'] = array_first($this->getLoveDescription($crawler));
