@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('constellation:Log')->daily()->everyMinute()->evenInMaintenanceMode();
+        $schedule->command('constellation:Log')->hourly();
     }
 
     /**
