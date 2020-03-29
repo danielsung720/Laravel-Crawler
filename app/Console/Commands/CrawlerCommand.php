@@ -9,7 +9,7 @@ class CrawlerCommand extends Command
 {
     protected $signature = 'constellation:Log';
 
-    protected $description = '儲存星座日誌';
+    protected $description = '儲存星座資訊';
 
     protected $crawlerService;
 
